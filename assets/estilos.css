@@ -1,0 +1,547 @@
+/* Identidade visual inspirada na Câmara dos Deputados — Editorial Cívico */
+
+:root {
+    --camara-emerald-900: #004628;
+    --camara-emerald-800: #005A32;
+    --camara-emerald-700: #006B3F;
+    --camara-emerald-100: #E6F2EC;
+    --camara-emerald-50: #F0F7F3;
+    --camara-gold-700: #8A6500;
+    --camara-gold-600: #C99700;
+    --camara-gold-200: #E9D289;
+    --camara-gold-50: #FDF8E7;
+    --camara-canvas: #F4F7F5;
+    --camara-surface: #FFFFFF;
+    --camara-border: #DCE5E0;
+    --camara-border-soft: #E8EFEA;
+    --camara-ink: #11241B;
+    --camara-ink-secondary: #3D5449;
+    --camara-ink-muted: #64786E;
+    --camara-shadow: 0 1px 2px rgba(17, 36, 27, 0.04), 0 8px 24px rgba(17, 36, 27, 0.035);
+}
+
+.stApp {
+    background-color: var(--camara-canvas);
+    color: var(--camara-ink);
+    font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Faixa institucional superior (verde-esmeralda -> dourado) */
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #004628 0%, #006B3F 64%, #C99700 100%);
+    z-index: 1000001;
+    pointer-events: none;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent;
+    height: 2.75rem;
+}
+
+[data-testid="stMainBlockContainer"] {
+    max-width: 1440px;
+    padding: 3.15rem clamp(1rem, 3vw, 2.5rem) 3rem;
+}
+
+/* ── Cabeçalho institucional ── */
+.st-key-cabecalho {
+    padding-bottom: 1.1rem;
+    margin-bottom: 0.45rem;
+    border-bottom: 1px solid var(--camara-border);
+}
+
+.camara-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.95rem;
+}
+
+.camara-emblem {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, var(--camara-emerald-800), var(--camara-emerald-700));
+    box-shadow: 0 4px 12px rgba(0, 90, 50, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camara-emblem img {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.camara-header-copy {
+    min-width: 0;
+}
+
+.camara-header-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.camara-header-title {
+    margin: 0;
+    color: var(--camara-ink);
+    font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+}
+
+.camara-freshness-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.68rem;
+    border-radius: 999px;
+    background: var(--camara-emerald-100);
+    border: 1px solid #C8E2D4;
+    color: var(--camara-emerald-800);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.camara-header-subtitle {
+    margin: 0.25rem 0 0;
+    color: var(--camara-ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Botões de ação (Excel primário verde / PDF secundário com borda verde) */
+.stApp button[kind="primary"],
+.stApp [data-testid="stBaseButton-primary"] {
+    min-height: 2.55rem;
+    border: 1px solid var(--camara-emerald-800);
+    border-radius: 10px;
+    background: var(--camara-emerald-700);
+    color: #FFFFFF;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    box-shadow: 0 2px 6px rgba(0, 90, 50, 0.16);
+    transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+
+.stApp button[kind="primary"]:hover,
+.stApp [data-testid="stBaseButton-primary"]:hover {
+    border-color: var(--camara-emerald-900);
+    background: var(--camara-emerald-800);
+    box-shadow: 0 4px 12px rgba(0, 90, 50, 0.22);
+    transform: translateY(-1px);
+}
+
+.stApp button[kind="secondary"],
+.stApp [data-testid="stBaseButton-secondary"] {
+    min-height: 2.55rem;
+    border: 1px solid #B7CEC1;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: var(--camara-emerald-800);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.stApp button[kind="secondary"]:hover,
+.stApp [data-testid="stBaseButton-secondary"]:hover {
+    border-color: var(--camara-emerald-700);
+    background: var(--camara-emerald-50);
+    color: var(--camara-emerald-900);
+    transform: translateY(-1px);
+}
+
+.st-key-filtros button[kind="tertiary"],
+.st-key-filtros [data-testid="stBaseButton-tertiary"] {
+    color: var(--camara-emerald-700);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 0.25rem 0.5rem;
+    justify-content: flex-end;
+}
+
+.st-key-filtros button[kind="tertiary"]:disabled,
+.st-key-filtros [data-testid="stBaseButton-tertiary"]:disabled {
+    color: var(--camara-ink-muted);
+    opacity: 0.5;
+    text-decoration: none;
+    cursor: default;
+}
+
+.st-key-filtros button[kind="tertiary"]:hover:not(:disabled),
+.st-key-filtros [data-testid="stBaseButton-tertiary"]:hover:not(:disabled) {
+    color: var(--camara-emerald-900);
+}
+
+/* ── Cartões brancos unificados ── */
+.st-key-filtros,
+.st-key-grafico-mensal,
+.st-key-grafico-categorias,
+.st-key-grafico-ufs,
+.st-key-grafico-deputados,
+.st-key-grafico-partidos,
+.st-key-grafico-media-categoria,
+.st-key-tabela {
+    border: 1px solid var(--camara-border) !important;
+    border-radius: 16px !important;
+    background: var(--camara-surface) !important;
+    box-shadow: var(--camara-shadow);
+}
+
+.st-key-filtros {
+    padding: 0.5rem 0.75rem 0.85rem;
+}
+
+.camara-filter-title {
+    margin: 0;
+    color: var(--camara-ink);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.camara-filter-subtitle {
+    margin: 0.15rem 0 0;
+    color: var(--camara-ink-muted);
+    font-size: 0.82rem;
+}
+
+/* Chips de filtros ativos */
+.camara-active-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    padding-top: 0.55rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--camara-border-soft);
+}
+
+.camara-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.22rem 0.65rem;
+    border-radius: 999px;
+    background: var(--camara-emerald-50);
+    border: 1px solid #CBE0D5;
+    color: var(--camara-emerald-800);
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.camara-chip strong {
+    font-weight: 700;
+}
+
+.camara-chip-count {
+    margin-left: auto;
+    color: var(--camara-ink-muted);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Faixa executiva de KPIs (4 colunas) ── */
+.camara-kpi-strip {
+    background: var(--camara-surface);
+    border: 1px solid var(--camara-border);
+    border-radius: 16px;
+    box-shadow: var(--camara-shadow);
+    overflow: hidden;
+}
+
+.camara-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.camara-kpi-card {
+    position: relative;
+    padding: 1.25rem 1.35rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.32rem;
+    border-top: 3px solid var(--camara-gold-600);
+}
+
+.camara-kpi-card--primary {
+    border-top-color: var(--camara-emerald-800);
+}
+
+.camara-kpi-card + .camara-kpi-card {
+    border-left: 1px solid var(--camara-border-soft);
+}
+
+.camara-kpi-label {
+    color: var(--camara-ink-secondary);
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.camara-kpi-value-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+    min-height: 2.35rem;
+}
+
+.camara-kpi-value {
+    color: var(--camara-ink);
+    font-size: clamp(1.42rem, 2.05vw, 1.88rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    font-variant-numeric: tabular-nums;
+}
+
+.camara-kpi-card--primary .camara-kpi-value {
+    color: var(--camara-emerald-800);
+}
+
+.camara-kpi-sparkline {
+    flex-shrink: 0;
+    width: 68px;
+    height: 28px;
+}
+
+.camara-kpi-caption {
+    color: var(--camara-ink-muted);
+    font-size: 0.8rem;
+    line-height: 1.35;
+    font-variant-numeric: tabular-nums;
+}
+
+.camara-kpi-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin-top: 0.08rem;
+    padding: 0.16rem 0.6rem;
+    border-radius: 999px;
+    background: var(--camara-gold-50);
+    border: 1px solid var(--camara-gold-200);
+    color: var(--camara-gold-700);
+    font-size: 0.76rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Cabeçalhos de seção e cartões de gráficos ── */
+.camara-section-head {
+    margin: 1.25rem 0 0.25rem;
+}
+
+.camara-section-kicker {
+    margin: 0 0 0.15rem;
+    color: var(--camara-emerald-700);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.camara-section-title {
+    margin: 0;
+    color: var(--camara-ink);
+    font-size: 1.25rem;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+}
+
+.camara-section-desc {
+    margin: 0.2rem 0 0;
+    color: var(--camara-ink-muted);
+    font-size: 0.86rem;
+}
+
+.st-key-grafico-mensal,
+.st-key-grafico-categorias,
+.st-key-grafico-ufs,
+.st-key-grafico-deputados,
+.st-key-grafico-partidos,
+.st-key-grafico-media-categoria {
+    padding: 0.55rem 0.8rem 0.45rem;
+}
+
+.camara-card-head {
+    margin-bottom: 0.2rem;
+}
+
+.camara-card-title {
+    margin: 0;
+    color: var(--camara-ink);
+    font-size: 1.02rem;
+    font-weight: 720;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+
+.camara-card-caption {
+    margin: 0.18rem 0 0;
+    color: var(--camara-ink-muted);
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+/* Banner metodológico para o ticket médio */
+.camara-method-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin: 0.35rem 0 0.45rem;
+    padding: 0.62rem 0.85rem;
+    border-radius: 10px;
+    border: 1px solid #EFE0AF;
+    border-left: 3.5px solid var(--camara-gold-600);
+    background: var(--camara-gold-50);
+    color: #5B4300;
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+.camara-method-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border-radius: 999px;
+    background: var(--camara-gold-600);
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Tabela analítica ── */
+.st-key-tabela {
+    margin-top: 0.65rem;
+    padding: 0.65rem 0.85rem 0.8rem;
+}
+
+.st-key-tabela [data-testid="stDataFrame"] {
+    border: 1px solid var(--camara-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Tags de multiselect harmonizadas ao verde institucional */
+[data-baseweb="tag"] {
+    background-color: var(--camara-emerald-100) !important;
+    color: var(--camara-emerald-900) !important;
+    border: 1px solid #C5DFD1 !important;
+    border-radius: 999px !important;
+}
+
+[data-baseweb="tag"] span {
+    color: var(--camara-emerald-900) !important;
+    font-weight: 600 !important;
+}
+
+/* ── Rodapé institucional ── */
+.camara-footer {
+    margin-top: 1.65rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--camara-border);
+    color: var(--camara-ink-muted);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.camara-footer a {
+    color: var(--camara-emerald-700);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.camara-footer a:hover {
+    text-decoration: underline;
+}
+
+.camara-footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.2rem;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 1024px) {
+    .camara-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .camara-kpi-card:nth-child(3) {
+        border-left: none;
+    }
+
+    .camara-kpi-card:nth-child(n + 3) {
+        border-top: 1px solid var(--camara-border-soft);
+    }
+}
+
+@media (max-width: 640px) {
+    [data-testid="stMainBlockContainer"] {
+        padding: 3.1rem 0.7rem 2rem;
+    }
+
+    .camara-header-brand {
+        align-items: flex-start;
+        gap: 0.7rem;
+    }
+
+    .camara-emblem {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    .camara-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .camara-kpi-card + .camara-kpi-card {
+        border-left: none;
+        border-top: 1px solid var(--camara-border-soft);
+    }
+
+    .camara-kpi-card {
+        padding: 0.95rem 1.05rem;
+    }
+
+    .camara-chip-count {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stApp button[kind="primary"],
+    .stApp [data-testid="stBaseButton-primary"],
+    .stApp button[kind="secondary"],
+    .stApp [data-testid="stBaseButton-secondary"] {
+        transition: none;
+        transform: none;
+    }
+}

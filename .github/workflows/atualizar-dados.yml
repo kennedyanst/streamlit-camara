@@ -1,0 +1,85 @@
+name: Atualizar dados da Câmara
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 10 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados-camara
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Testar transformações
+        run: python -m unittest discover -s tests -v
+
+      - name: Baixar dados públicos e gerar snapshot
+        run: python atualizar_dados.py
+
+      - name: Validar arquivos gerados
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          csv_path = Path("dados/despesas_camara.csv")
+          summary_path = Path("dados/resumo_dados.json")
+          if not csv_path.is_file() or not summary_path.is_file():
+              raise RuntimeError("Os arquivos de dados não foram gerados.")
+
+          dados = pd.read_csv(csv_path, sep=";", encoding="utf-8-sig")
+          resumo = json.loads(summary_path.read_text(encoding="utf-8"))
+          if dados.empty:
+              raise RuntimeError("O snapshot não contém registros.")
+          if len(dados) != resumo["registros_agregados"]:
+              raise RuntimeError("A quantidade de linhas difere do resumo.")
+          if int(dados["Documentos"].sum()) != resumo["registros_origem"]:
+              raise RuntimeError("A contagem de documentos está inconsistente.")
+
+          print(
+              f"Validação concluída: {resumo['registros_origem']} documentos "
+              f"em {len(dados)} grupos."
+          )
+          PY
+
+      - name: Publicar dados atualizados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dados/despesas_camara.csv dados/resumo_dados.json
+
+          if git diff --cached --quiet; then
+            echo "A fonte não mudou; nenhum commit será criado."
+            exit 0
+          fi
+
+          git commit -m "Atualiza despesas públicas da Câmara"
+          git fetch origin "$GITHUB_REF_NAME"
+          if ! git rebase "origin/$GITHUB_REF_NAME"; then
+            git rebase --abort
+            echo "::error::A branch mudou durante a atualização. Execute o workflow novamente."
+            exit 1
+          fi
+          git push origin "HEAD:${GITHUB_REF_NAME}"
