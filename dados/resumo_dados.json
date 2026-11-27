@@ -1,18 +1,18 @@
 {
   "fonte": "Câmara dos Deputados — Cota para Exercício da Atividade Parlamentar",
   "url_fonte": "https://www.camara.leg.br/cotas/Ano-2026.csv.zip",
-  "arquivo_fonte_modificado_em": "Thu, 26 Nov 2026 06:21:02 GMT",
+  "arquivo_fonte_modificado_em": "Fri, 27 Nov 2026 06:42:18 GMT",
   "ano": 2026,
-  "registros_origem": 128906,
-  "registros_agregados": 23906,
+  "registros_origem": 130255,
+  "registros_agregados": 24641,
   "contagens": {
     "deputados": 577,
-    "categorias": 19,
-    "documentos": 128906
+    "categorias": 21,
+    "documentos": 130255
   },
   "totais": {
-    "valor_documentos": 165754879.13,
-    "valor_glosado": 1280746.93,
-    "valor_liquido": 164431387.87
+    "valor_documentos": 168698347.72,
+    "valor_glosado": 1289793.11,
+    "valor_liquido": 164071639.0
   }
 }
